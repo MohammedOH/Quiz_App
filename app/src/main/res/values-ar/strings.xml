@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">أسئلة</string>
+    <string name="start">ابدأ</string>
+    <string name="quiz">اختبار</string>
+    <string name="question">سؤال</string>
+    <string name="confirm">تأكيد</string>
+    <string name="next">التالي</string>
+    <string name="finish">انتهى</string>
+    <string name="result">النتيجة</string>
+    <string name="button_not_selected">اختر جواباً!</string>
+    <string name="slash">\\</string>
+
+</resources>
