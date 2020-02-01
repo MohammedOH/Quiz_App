@@ -1,5 +1,6 @@
 package com.example.quiz.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -24,13 +25,6 @@ public class Question {
     private int correct;
 
     public Question() {
-    }
-
-    public Question(String question, List<String> content, int correct) {
-        super();
-        this.question = question;
-        this.content = content;
-        this.correct = correct;
     }
 
     public String getQuestion() {
@@ -65,4 +59,9 @@ public class Question {
         this.question_no = question_no;
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return String.format("Number = %d\nQesution = %s", question_no, question);
+    }
 }

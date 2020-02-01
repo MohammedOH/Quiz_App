@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.QuizActivity">
+    tools:context=".view.QuizActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -79,7 +79,7 @@
             android:id="@+id/rb_first_option"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center|start|left"
+            android:gravity="center|start"
             android:padding="@dimen/quiz_radio_padding"
             android:textAlignment="viewStart"
             android:textSize="16sp"
@@ -89,7 +89,7 @@
             android:id="@+id/rb_second_option"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center|start|left"
+            android:gravity="center|start"
             android:padding="@dimen/quiz_radio_padding"
             android:textAlignment="viewStart"
             android:textSize="16sp"
@@ -99,11 +99,21 @@
             android:id="@+id/rb_third_option"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center|start|left"
+            android:gravity="center|start"
             android:padding="@dimen/quiz_radio_padding"
             android:textAlignment="viewStart"
             android:textSize="16sp"
             tools:text="Third Option" />
+
+        <RadioButton
+            android:id="@+id/rb_fourth_option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|start"
+            android:padding="@dimen/quiz_radio_padding"
+            android:textAlignment="viewStart"
+            android:textSize="@dimen/question_textSize"
+            tools:text="Fourth Option" />
 
     </RadioGroup>
 

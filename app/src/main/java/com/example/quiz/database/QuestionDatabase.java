@@ -7,11 +7,11 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-import com.example.quiz.converters.StringListConverter;
+import com.example.quiz.converters.ContentListTypeConverter;
 import com.example.quiz.model.Question;
 
 @Database(entities = {Question.class}, version = 1, exportSchema = false)
-@TypeConverters({StringListConverter.class})
+@TypeConverters({ContentListTypeConverter.class})
 public abstract class QuestionDatabase extends RoomDatabase {
 
     private static QuestionDatabase sInstance;

@@ -1,4 +1,4 @@
-package com.example.quiz.activities;
+package com.example.quiz.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

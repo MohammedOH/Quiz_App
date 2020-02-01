@@ -1,4 +1,4 @@
-package com.example.quiz.activities;
+package com.example.quiz.view;
 
 import android.animation.AnimatorInflater;
 import android.animation.ObjectAnimator;
@@ -13,9 +13,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.quiz.R;
 import com.example.quiz.model.Question;
+import com.example.quiz.viewModel.MainViewModel;
+import com.example.quiz.viewModel.QuizViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +30,13 @@ public class QuizActivity extends AppCompatActivity {
     // Resource Items creation
     private Button confirm;
     private TextView tv_question, tv_questionCount;
-    private RadioButton option_1, option_2, option_3;
+    private RadioButton option_1, option_2, option_3, option_4;
     private RadioGroup rg_answers;
     // Global variables each with specified purpose
     private int currentQuestion, correctAnswer, correctCount;
     // String array to store questions
     private List<Question> questions;
+    QuizViewModel quizViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +44,10 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
         // Inflating needed items
         inflateItems();
-        // Getting questions from resource files
+        // Getting questions from database
         getQuestions();
         // Setting first question
-        set_question(questions.get(0));
+//        set_question(questions.get(0));
     }
 
     private void inflateItems() {
@@ -54,20 +58,44 @@ public class QuizActivity extends AppCompatActivity {
         option_1 = findViewById(R.id.rb_first_option);
         option_2 = findViewById(R.id.rb_second_option);
         option_3 = findViewById(R.id.rb_third_option);
+        option_4 = findViewById(R.id.rb_fourth_option);
         rg_answers = findViewById(R.id.radioGroup);
+        quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
         // Initializing global variables to
         currentQuestion = 0;
         correctCount = 0;
         // Initializing strings
         CONFIRM = getResources().getString(R.string.confirm);
         NEXT = getResources().getString(R.string.next);
-
         questions = new ArrayList<>();
     }
 
-    /* Get all questions from resource file */
+    /* Get all questions from database */
     private void getQuestions() {
         questions = new ArrayList<>();
+        int[] questionsNo = new int[10];
+        int i = 0;
+        while (i < 10) {
+            int rand = 1 + (int) (Math.random() * 95);
+            boolean exist = false;
+            for (int j = 0; j < questionsNo.length; j++) {
+                if (rand == questionsNo[j]) {
+                    exist = true;
+                    break;
+                }
+            }
+            if (exist) {
+                continue;
+            }
+            questionsNo[i++] = rand;
+        }
+        for (int j = 0; j < questionsNo.length; j++) {
+//            System.out.println(quizViewModel.getQuestion(questionsNo[j]));
+            questions.add(quizViewModel.getQuestion(questionsNo[j]));
+        }
+//        for (int j = 0; j < 10; j++) {
+//            System.out.println(questions.get(j));
+//        }
     }
 
     /* Set question to the views in layout */
@@ -77,6 +105,7 @@ public class QuizActivity extends AppCompatActivity {
         option_1.setText(q.getContent().get(0));
         option_2.setText(q.getContent().get(1));
         option_3.setText(q.getContent().get(2));
+        option_4.setText(q.getContent().get(4));
         tv_questionCount.setText(String.format("%d \t/\t%d", currentQuestion + 1, questions.size()));
         // Reassign the correct answer
         correctAnswer = q.getCorrect();

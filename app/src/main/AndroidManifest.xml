@@ -11,16 +11,16 @@
         android:roundIcon="@drawable/ic_quiz"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.SplashActivity">
+        <activity android:name=".view.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.MainActivity" />
-        <activity android:name=".activities.QuizActivity" />
-        <activity android:name=".activities.ResultActivity" />
+        <activity android:name=".view.MainActivity" />
+        <activity android:name=".view.QuizActivity" />
+        <activity android:name=".view.ResultActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

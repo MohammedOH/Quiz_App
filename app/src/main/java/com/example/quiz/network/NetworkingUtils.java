@@ -1,11 +1,12 @@
 package com.example.quiz.network;
 
-import android.content.Context;
-import android.net.Uri;
+import com.google.gson.GsonBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -14,7 +15,7 @@ public class NetworkingUtils {
     private static final String BASE_URL = "https://questionapi.000webhostapp.com/";
     private static final String PAGE = "page";
 
-    private QuestionsApi questionsApi;
+    private QuestionArrayApi questionArrayApi;
     private static NetworkingUtils instance;
 
     public static NetworkingUtils getInstance() {
@@ -25,15 +26,23 @@ public class NetworkingUtils {
     }
 
     private NetworkingUtils() {
+        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+        httpLoggingInterceptor.level(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(httpLoggingInterceptor)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder()
+                        .setLenient()
+                        .create()))
                 .build();
-        questionsApi = retrofit.create(QuestionsApi.class);
+        questionArrayApi = retrofit.create(QuestionArrayApi.class);
     }
 
-    public QuestionsApi getQuestionsApi() {
-        return questionsApi;
+    public QuestionArrayApi getQuestionArrayApi() {
+        return questionArrayApi;
     }
 
     public Map<String, String> getQueryMap() {

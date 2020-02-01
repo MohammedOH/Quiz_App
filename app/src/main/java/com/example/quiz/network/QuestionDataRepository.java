@@ -23,7 +23,7 @@ public class QuestionDataRepository {
     private Application application;
     private NetworkingUtils mNetworkingUtils;
     private QuestionDatabase mQuestionDatabase;
-    private QuestionsApi mQuestionApi;
+    private QuestionArrayApi mQuestionApi;
     private QuestionDao mQuestionDao;
 
     public static QuestionDataRepository getInstance(Application application) {
@@ -36,23 +36,28 @@ public class QuestionDataRepository {
     private QuestionDataRepository(Application application) {
         this.application = application;
         mNetworkingUtils = NetworkingUtils.getInstance();
-        mQuestionApi = mNetworkingUtils.getQuestionsApi();
+        mQuestionApi = mNetworkingUtils.getQuestionArrayApi();
         mQuestionDatabase = QuestionDatabase.getInstance(application);
         mQuestionDao = mQuestionDatabase.getQuestionDao();
     }
 
     public LiveData<Question> getQuestions() {
         updateQuestions();
-        return mQuestionDatabase.getQuestionDao().getQuestions();
+        return mQuestionDao.getQuestions();
+    }
+
+    public Question getQuestion(int no) {
+        return mQuestionDao.getQuestionByNo(no);
     }
 
     public void updateQuestions() {
-        Call<List<Question>> questionsApiCall = mNetworkingUtils.getQuestionsApi().getQuestions(mNetworkingUtils.getQueryMap());
+        final Call<List<Question>> questionsApiCall = mNetworkingUtils.getQuestionArrayApi().getQuestions(mNetworkingUtils.getQueryMap());
         questionsApiCall.enqueue(new Callback<List<Question>>() {
             @Override
             public void onResponse(@NonNull Call<List<Question>> call, @NonNull Response<List<Question>> response) {
                 Toast.makeText(application.getApplicationContext(), "DownLoading data ...", Toast.LENGTH_LONG).show();
                 List<Question> questions = response.body();
+                System.out.println(questions == null);
                 if (questions != null && questions.size() > 0) {
                     for (Question q : questions) {
                         mQuestionDao.addQuestion(q);
@@ -62,9 +67,10 @@ public class QuestionDataRepository {
 
             @Override
             public void onFailure(@NonNull Call<List<Question>> call, @NonNull Throwable t) {
+                t.printStackTrace();
+                System.out.println(t.getMessage());
                 Toast.makeText(application.getApplicationContext(), "There was an Error!", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
 }

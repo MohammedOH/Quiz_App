@@ -1,15 +1,13 @@
-package com.example.quiz.activities;
+package com.example.quiz.view;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.quiz.R;
@@ -34,11 +32,11 @@ public class MainActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         networkingUtils = NetworkingUtils.getInstance();
 
-        if (!sharedPreferences.getBoolean("first", false)) {
+//        if (!sharedPreferences.getBoolean("first", false)) {
             MainViewModel mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
             mainViewModel.updateQuestions();
             sharedPreferences.edit().putBoolean("first", true).apply();
-        }
+//        }
         progressBar.setVisibility(View.GONE);
     }
 

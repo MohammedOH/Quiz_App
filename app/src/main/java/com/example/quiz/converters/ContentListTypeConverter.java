@@ -8,7 +8,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class StringListConverter {
+public class ContentListTypeConverter {
 
     @TypeConverter
     public String setContent(List<String> content) {

@@ -1,4 +1,4 @@
-package com.example.quiz.activities;
+package com.example.quiz.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -10,14 +10,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.TypedValue;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 import com.example.quiz.R;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
 public class SplashActivity extends AppCompatActivity {
 
