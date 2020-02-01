@@ -47,7 +47,7 @@ public class QuizActivity extends AppCompatActivity {
         // Getting questions from database
         getQuestions();
         // Setting first question
-//        set_question(questions.get(0));
+        set_question(questions.get(0));
     }
 
     private void inflateItems() {

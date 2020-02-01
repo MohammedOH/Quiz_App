@@ -68,7 +68,6 @@ public class QuestionDataRepository {
             @Override
             public void onFailure(@NonNull Call<List<Question>> call, @NonNull Throwable t) {
                 t.printStackTrace();
-                System.out.println(t.getMessage());
                 Toast.makeText(application.getApplicationContext(), "There was an Error!", Toast.LENGTH_SHORT).show();
             }
         });

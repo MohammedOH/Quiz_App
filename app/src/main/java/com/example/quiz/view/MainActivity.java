@@ -32,11 +32,11 @@ public class MainActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         networkingUtils = NetworkingUtils.getInstance();
 
-//        if (!sharedPreferences.getBoolean("first", false)) {
+        if (!sharedPreferences.getBoolean("first", false)) {
             MainViewModel mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
             mainViewModel.updateQuestions();
             sharedPreferences.edit().putBoolean("first", true).apply();
-//        }
+        }
         progressBar.setVisibility(View.GONE);
     }
 
