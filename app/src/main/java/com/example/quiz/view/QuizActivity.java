@@ -33,15 +33,17 @@ public class QuizActivity extends AppCompatActivity {
     private RadioButton option_1, option_2, option_3, option_4;
     private RadioGroup rg_answers;
     // Global variables each with specified purpose
-    private int currentQuestion, correctAnswer, correctCount;
+    private int currentQuestion, correctAnswer, correctCount, qNumber;
     // String array to store questions
     private List<Question> questions;
-    QuizViewModel quizViewModel;
+    private int[] questionsNo;
+    private QuizViewModel quizViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
+        qNumber = getIntent().getIntExtra("q_number", 20);
         // Inflating needed items
         inflateItems();
         // Getting questions from database
@@ -73,9 +75,9 @@ public class QuizActivity extends AppCompatActivity {
     /* Get all questions from database */
     private void getQuestions() {
         questions = new ArrayList<>();
-        int[] questionsNo = new int[10];
+        questionsNo = new int[qNumber];
         int i = 0;
-        while (i < 10) {
+        while (i < qNumber) {
             int rand = 1 + (int) (Math.random() * 95);
             boolean exist = false;
             for (int j = 0; j < questionsNo.length; j++) {
@@ -89,6 +91,10 @@ public class QuizActivity extends AppCompatActivity {
             }
             questionsNo[i++] = rand;
         }
+        getQuestionsFromDatabase();
+    }
+
+    private void getQuestionsFromDatabase() {
         for (int j = 0; j < questionsNo.length; j++) {
             questions.add(quizViewModel.getQuestion(questionsNo[j]));
         }
@@ -105,16 +111,6 @@ public class QuizActivity extends AppCompatActivity {
         tv_questionCount.setText(String.format("%d \t/\t%d", currentQuestion + 1, questions.size()));
         // Reassign the correct answer
         correctAnswer = q.getCorrect();
-        // Clear background of each radio button
-        option_1.setBackground(null);
-        option_2.setBackground(null);
-        option_3.setBackground(null);
-        option_4.setBackground(null);
-        // Set buttons to be clicked again for the next question
-        // Setting buttons to non-clickable for the purpose of no change gets into the result
-        setClickable(true);
-        // Clear previous answer from buttons
-        rg_answers.clearCheck();
     }
 
     public void onClick(View view) {
@@ -128,19 +124,19 @@ public class QuizActivity extends AppCompatActivity {
                 // Get which button is returned
                 switch (rg_answers.getCheckedRadioButtonId()) {
                     case R.id.rb_first_option:
-                        answer = 1;
+                        answer = 0;
                         result = option_1;
                         break;
                     case R.id.rb_second_option:
-                        answer = 2;
+                        answer = 1;
                         result = option_2;
                         break;
                     case R.id.rb_third_option:
-                        answer = 3;
+                        answer = 2;
                         result = option_3;
                         break;
                     case R.id.rb_fourth_option:
-                        answer = 4;
+                        answer = 3;
                         result = option_4;
                         break;
                     default:
@@ -175,6 +171,16 @@ public class QuizActivity extends AppCompatActivity {
             } else if (((Button) view).getText().toString().equals(NEXT)) {
                 // Show confirm again
                 confirm.setText(R.string.confirm);
+                // Clear background of each radio button
+                option_1.setBackground(null);
+                option_2.setBackground(null);
+                option_3.setBackground(null);
+                option_4.setBackground(null);
+                // Set buttons to be clicked again for the next question
+                // Setting buttons to non-clickable for the purpose of no change gets into the result
+                setClickable(true);
+                // Clear previous answer from buttons
+                rg_answers.clearCheck();
                 // Setting the next question
                 set_question(questions.get(++currentQuestion));
             } else {
@@ -201,6 +207,9 @@ public class QuizActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
+        for (int i = 0; i < questionsNo.length; i++) {
+            outState.putInt("question_list_".concat(String.valueOf(i)), questionsNo[i]);
+        }
         outState.putString("button_string", confirm.getText().toString());
         outState.putInt("current_question", currentQuestion);
         outState.putInt("correct_count", correctCount);
@@ -227,6 +236,11 @@ public class QuizActivity extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+        questions = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            questionsNo[i] = savedInstanceState.getInt("question_list_".concat(String.valueOf(i)));
+        }
+        getQuestionsFromDatabase();
         confirm.setText(savedInstanceState.getString("button_string"));
         currentQuestion = savedInstanceState.getInt("current_question");
         correctCount = savedInstanceState.getInt("correct_count");

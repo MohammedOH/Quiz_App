@@ -5,11 +5,14 @@
     <string name="start">ابدأ</string>
     <string name="quiz">اختبار</string>
     <string name="question">سؤال</string>
+    <string name="question_number">عدد الأسئلة(5, 45)</string>
     <string name="confirm">تأكيد</string>
+    <string name="fill_fields">الرجاء إدخال عدد الأسئلة</string>
     <string name="next">التالي</string>
     <string name="finish">انتهى</string>
     <string name="result">النتيجة</string>
     <string name="button_not_selected">اختر جواباً!</string>
     <string name="slash">\\</string>
+    <string name="invalid_q_num">الرجاء إدخال رقم بين (5, 45)!</string>
 
 </resources>

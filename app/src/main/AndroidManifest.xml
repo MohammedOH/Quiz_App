@@ -22,10 +22,6 @@
         <activity android:name=".view.QuizActivity" />
         <activity android:name=".view.ResultActivity" />
 
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-
     </application>
 
 </manifest>

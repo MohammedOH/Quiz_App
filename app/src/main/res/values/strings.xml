@@ -4,11 +4,14 @@
     <string name="start">Start</string>
     <string name="quiz">Quiz</string>
     <string name="question">Question</string>
+    <string name="question_number">Questions number(5, 45)</string>
     <string name="confirm">Confirm</string>
+    <string name="fill_fields">Please enter a number!</string>
     <string name="next">Next</string>
     <string name="finish">Finish</string>
     <string name="result">Result</string>
     <string name="button_not_selected">No answer selected!</string>
     <string name="slash">/</string>
+    <string name="invalid_q_num">Please enter a num within (5, 45)!</string>
 
 </resources>
