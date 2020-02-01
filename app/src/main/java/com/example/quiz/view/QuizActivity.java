@@ -90,12 +90,8 @@ public class QuizActivity extends AppCompatActivity {
             questionsNo[i++] = rand;
         }
         for (int j = 0; j < questionsNo.length; j++) {
-//            System.out.println(quizViewModel.getQuestion(questionsNo[j]));
             questions.add(quizViewModel.getQuestion(questionsNo[j]));
         }
-//        for (int j = 0; j < 10; j++) {
-//            System.out.println(questions.get(j));
-//        }
     }
 
     /* Set question to the views in layout */
@@ -105,7 +101,7 @@ public class QuizActivity extends AppCompatActivity {
         option_1.setText(q.getContent().get(0));
         option_2.setText(q.getContent().get(1));
         option_3.setText(q.getContent().get(2));
-        option_4.setText(q.getContent().get(4));
+        option_4.setText(q.getContent().get(3));
         tv_questionCount.setText(String.format("%d \t/\t%d", currentQuestion + 1, questions.size()));
         // Reassign the correct answer
         correctAnswer = q.getCorrect();
@@ -113,6 +109,7 @@ public class QuizActivity extends AppCompatActivity {
         option_1.setBackground(null);
         option_2.setBackground(null);
         option_3.setBackground(null);
+        option_4.setBackground(null);
         // Set buttons to be clicked again for the next question
         // Setting buttons to non-clickable for the purpose of no change gets into the result
         setClickable(true);
@@ -141,6 +138,10 @@ public class QuizActivity extends AppCompatActivity {
                     case R.id.rb_third_option:
                         answer = 3;
                         result = option_3;
+                        break;
+                    case R.id.rb_fourth_option:
+                        answer = 4;
+                        result = option_4;
                         break;
                     default:
                         // Default values in case no button is selected
@@ -194,6 +195,7 @@ public class QuizActivity extends AppCompatActivity {
         option_1.setClickable(isClickable);
         option_2.setClickable(isClickable);
         option_3.setClickable(isClickable);
+        option_4.setClickable(isClickable);
     }
 
     @Override
@@ -214,6 +216,9 @@ public class QuizActivity extends AppCompatActivity {
                 break;
             case R.id.rb_third_option:
                 answer = 3;
+                break;
+            case R.id.rb_fourth_option:
+                answer = 4;
                 break;
         }
         outState.putInt("answer", answer);
@@ -237,6 +242,9 @@ public class QuizActivity extends AppCompatActivity {
                 break;
             case 3:
                 result = option_3;
+                break;
+            case 4:
+                result = option_4;
                 break;
             default:
                 return;
