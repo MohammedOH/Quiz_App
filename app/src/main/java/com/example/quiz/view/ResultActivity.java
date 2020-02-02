@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.quiz.R;
@@ -42,6 +43,10 @@ public class ResultActivity extends AppCompatActivity {
         countQuestions =  savedInstanceState.getInt("countQuestions");
         result.setText(String.valueOf(countCorrect));
         questionsNumber.setText(String.valueOf(countQuestions));
+    }
+
+    public void tryAgain(View view) {
+        finish();
     }
 
 }

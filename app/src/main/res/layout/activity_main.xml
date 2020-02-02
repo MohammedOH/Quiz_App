@@ -11,7 +11,6 @@
         android:id="@+id/main_tv_simple_quiz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="@string/quiz"
         android:textSize="@dimen/main_string_size"
         app:layout_constraintBottom_toTopOf="@+id/text_input_q_num"
@@ -24,6 +23,7 @@
         android:layout_width="@dimen/main_button_width"
         android:layout_height="@dimen/main_button_height"
         android:background="@color/colorAccent"
+        android:enabled="false"
         android:onClick="startQuiz"
         android:text="@string/start"
         android:textAllCaps="false"
@@ -34,25 +34,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_input_q_num" />
 
-    <ProgressBar
-        android:id="@+id/main_progress_bar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_input_q_num"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_8"
         android:hint="@string/question_number"
         app:layout_constraintBottom_toTopOf="@+id/main_btn_start"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,5 +57,18 @@
             android:textSize="@dimen/quiz_count_textSize" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/main_refresh_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8"
+        android:drawableEnd="@drawable/ic_refresh"
+        android:onClick="refresh"
+        android:text="@string/refresh"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_tv_simple_quiz" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

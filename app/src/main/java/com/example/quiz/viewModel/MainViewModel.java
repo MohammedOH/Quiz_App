@@ -13,24 +13,18 @@ import com.example.quiz.network.QuestionDataRepository;
 public class MainViewModel extends AndroidViewModel {
 
     private QuestionDataRepository mRepository;
-    private LiveData<Question> mQuestionLiveData;
 
     public MainViewModel(@NonNull Application application) {
         super(application);
         mRepository = QuestionDataRepository.getInstance(application);
-        mQuestionLiveData = mRepository.getQuestions();
-    }
-
-    public LiveData<Question> getQuestions() {
-        return mQuestionLiveData;
     }
 
     public Question getQuestion(int no) {
         return mRepository.getQuestion(no);
     }
 
-    public void updateQuestions() {
-        mRepository.updateQuestions();
+    public void updateQuestions(QuestionDataRepository.RetrofitResponseListener retrofitResponseListener) {
+        mRepository.updateQuestions(retrofitResponseListener);
     }
 
 }

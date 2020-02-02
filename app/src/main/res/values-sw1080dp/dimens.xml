@@ -3,7 +3,8 @@
     <!--  DP  -->
     <dimen name="default_margin">64dp</dimen>
     <dimen name="result_min">250dp</dimen>
-    <dimen name="quiz_count_margin">32dp</dimen>
+    <dimen name="margin_16">32dp</dimen>
+    <dimen name="margin_8">16dp</dimen>
     <dimen name="quiz_radio_padding">24dp</dimen>
     <dimen name="main_button_width">300dp</dimen>
     <dimen name="main_button_height">140dp</dimen>

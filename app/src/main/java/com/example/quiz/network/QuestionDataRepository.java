@@ -1,6 +1,7 @@
 package com.example.quiz.network;
 
 import android.app.Application;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,6 +34,13 @@ public class QuestionDataRepository {
         return sInstance;
     }
 
+    private RetrofitResponseListener retrofitResponseListener;
+
+    public interface RetrofitResponseListener {
+        void onSuccess();
+        void onFailure();
+    }
+
     private QuestionDataRepository(Application application) {
         this.application = application;
         mNetworkingUtils = NetworkingUtils.getInstance();
@@ -41,34 +49,39 @@ public class QuestionDataRepository {
         mQuestionDao = mQuestionDatabase.getQuestionDao();
     }
 
-    public LiveData<Question> getQuestions() {
-        updateQuestions();
-        return mQuestionDao.getQuestions();
-    }
-
     public Question getQuestion(int no) {
         return mQuestionDao.getQuestionByNo(no);
     }
 
-    public void updateQuestions() {
-        final Call<List<Question>> questionsApiCall = mNetworkingUtils.getQuestionArrayApi().getQuestions(mNetworkingUtils.getQueryMap());
-        questionsApiCall.enqueue(new Callback<List<Question>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<Question>> call, @NonNull Response<List<Question>> response) {
-                Toast.makeText(application.getApplicationContext(), "DownLoading data ...", Toast.LENGTH_LONG).show();
-                List<Question> questions = response.body();
-                System.out.println(questions == null);
-                if (questions != null && questions.size() > 0) {
-                    for (Question q : questions) {
-                        mQuestionDao.addQuestion(q);
+    public void updateQuestions(final RetrofitResponseListener retrofitResponseListener) {
+        // If not downloaded previously
+        if (getQuestion(1) == null) {
+            Toast.makeText(application.getApplicationContext(), "DownLoading data ...", Toast.LENGTH_LONG).show();
+            final Call<List<Question>> questionsApiCall = mNetworkingUtils.getQuestionArrayApi().getQuestions(mNetworkingUtils.getQueryMap());
+            questionsApiCall.enqueue(new Callback<List<Question>>() {
+                @Override
+                public void onResponse(@NonNull Call<List<Question>> call, @NonNull Response<List<Question>> response) {
+                    if (response.isSuccessful())
+                        retrofitResponseListener.onSuccess();
+                    else
+                        retrofitResponseListener.onFailure();
+                    Toast.makeText(application.getApplicationContext(), "DownLoaded successfully!", Toast.LENGTH_LONG).show();
+                    List<Question> questions = response.body();
+                    if (questions != null && questions.size() > 0) {
+                        for (Question q : questions) {
+                            mQuestionDao.addQuestion(q);
+                        }
                     }
-                }
-            }
 
-            @Override
-            public void onFailure(@NonNull Call<List<Question>> call, @NonNull Throwable t) {
-                Toast.makeText(application.getApplicationContext(), "There was an Error!", Toast.LENGTH_SHORT).show();
-            }
-        });
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<List<Question>> call, @NonNull Throwable t) {
+                    retrofitResponseListener.onFailure();
+                    Toast.makeText(application.getApplicationContext(), "There was an Error!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
+
 }
