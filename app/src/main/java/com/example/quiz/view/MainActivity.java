@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         inflateItems();
 
-        if (mainViewModel.getQuestion(1) == null) {
+        if (!mainViewModel.dataDownloaded()) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_WIFI_STATE)
                     != PackageManager.PERMISSION_GRANTED) {
                 showExplanationDialog(internetNeeded);
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void downloadData() {
-        boolean downloadedPreviously = mainViewModel.getQuestion(1) != null;
+        boolean downloadedPreviously = mainViewModel.dataDownloaded();
         if (!downloadedPreviously) {
             mainViewModel.updateQuestions(new QuestionDataRepository.RetrofitResponseListener() {
                 @Override

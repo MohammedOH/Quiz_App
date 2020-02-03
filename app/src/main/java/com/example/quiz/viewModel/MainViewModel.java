@@ -19,6 +19,10 @@ public class MainViewModel extends AndroidViewModel {
         mRepository = QuestionDataRepository.getInstance(application);
     }
 
+    public boolean dataDownloaded() {
+        return mRepository.getQuestion(45) != null;
+    }
+
     public Question getQuestion(int no) {
         return mRepository.getQuestion(no);
     }

@@ -47,73 +47,87 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="i \t / \t *" />
 
-    <TextView
-        android:id="@+id/tv_question"
+    <ScrollView
+        android:id="@+id/questions_scroll_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/default_margin"
         android:layout_marginTop="@dimen/default_margin"
         android:layout_marginEnd="@dimen/default_margin"
         android:layout_marginBottom="@dimen/default_margin"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/question_textSize"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:text="Full Question" />
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
+        <TextView
+            android:id="@+id/tv_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/question_textSize"
+            tools:text="Full Question" />
+
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/options_scroll_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/tv_question"
-        app:layout_constraintStart_toStartOf="@+id/tv_question"
+        app:layout_constraintEnd_toEndOf="@+id/questions_scroll_view"
+        app:layout_constraintStart_toStartOf="@+id/questions_scroll_view"
         app:layout_constraintTop_toTopOf="@+id/guideline"
         app:layout_constraintVertical_bias="0.15">
 
-        <RadioButton
-            android:id="@+id/rb_first_option"
+        <RadioGroup
+            android:id="@+id/radioGroup"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center|start"
-            android:padding="@dimen/quiz_radio_padding"
-            android:textAlignment="viewStart"
-            android:textSize="@dimen/question_textSize"
-            tools:text="First Option" />
+            android:layout_height="wrap_content">
 
-        <RadioButton
-            android:id="@+id/rb_second_option"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center|start"
-            android:padding="@dimen/quiz_radio_padding"
-            android:textAlignment="viewStart"
-            android:textSize="@dimen/question_textSize"
-            tools:text="Second Option" />
+            <RadioButton
+                android:id="@+id/rb_first_option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:padding="@dimen/quiz_radio_padding"
+                android:textAlignment="viewStart"
+                android:textSize="@dimen/question_textSize"
+                tools:text="First Option" />
 
-        <RadioButton
-            android:id="@+id/rb_third_option"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center|start"
-            android:padding="@dimen/quiz_radio_padding"
-            android:textAlignment="viewStart"
-            android:textSize="@dimen/question_textSize"
-            tools:text="Third Option" />
+            <RadioButton
+                android:id="@+id/rb_second_option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:padding="@dimen/quiz_radio_padding"
+                android:textAlignment="viewStart"
+                android:textSize="@dimen/question_textSize"
+                tools:text="Second Option" />
 
-        <RadioButton
-            android:id="@+id/rb_fourth_option"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center|start"
-            android:padding="@dimen/quiz_radio_padding"
-            android:textAlignment="viewStart"
-            android:textSize="@dimen/question_textSize"
-            tools:text="Fourth Option" />
+            <RadioButton
+                android:id="@+id/rb_third_option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:padding="@dimen/quiz_radio_padding"
+                android:textAlignment="viewStart"
+                android:textSize="@dimen/question_textSize"
+                tools:text="Third Option" />
 
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/rb_fourth_option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:padding="@dimen/quiz_radio_padding"
+                android:textAlignment="viewStart"
+                android:textSize="@dimen/question_textSize"
+                tools:text="Fourth Option" />
+
+        </RadioGroup>
+
+    </ScrollView>
 
     <Button
         android:id="@+id/btn_confirm"
@@ -128,6 +142,6 @@
         android:textSize="@dimen/question_textSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/options_scroll_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
