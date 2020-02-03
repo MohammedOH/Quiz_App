@@ -15,6 +15,7 @@
     <dimen name="result_no">50sp</dimen>
     <dimen name="result_string">55sp</dimen>
     <dimen name="question_textSize">30sp</dimen>
+    <dimen name="textSize_12">16sp</dimen>
     <dimen name="quiz_count_textSize">40sp</dimen>
 
 </resources>

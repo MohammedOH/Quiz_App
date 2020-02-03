@@ -14,5 +14,7 @@
     <string name="button_not_selected">اختر جواباً!</string>
     <string name="slash">\\</string>
     <string name="invalid_q_num">الرجاء إدخال رقم بين (5, 45)!</string>
+    <string name="try_again">محاولة أخرى</string>
+    <string name="refresh">إعادة تحميل</string>
 
 </resources>

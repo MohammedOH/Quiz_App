@@ -218,16 +218,16 @@ public class QuizActivity extends AppCompatActivity {
         int answer = -1;
         switch (rg_answers.getCheckedRadioButtonId()) {
             case R.id.rb_first_option:
-                answer = 1;
+                answer = 0;
                 break;
             case R.id.rb_second_option:
-                answer = 2;
+                answer = 1;
                 break;
             case R.id.rb_third_option:
-                answer = 3;
+                answer = 2;
                 break;
             case R.id.rb_fourth_option:
-                answer = 4;
+                answer = 3;
                 break;
         }
         outState.putInt("answer", answer);
@@ -237,7 +237,7 @@ public class QuizActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         questions = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < qNumber; i++) {
             questionsNo[i] = savedInstanceState.getInt("question_list_".concat(String.valueOf(i)));
         }
         getQuestionsFromDatabase();
@@ -248,16 +248,16 @@ public class QuizActivity extends AppCompatActivity {
         int answer = savedInstanceState.getInt("answer");
         RadioButton result;
         switch (answer) {
-            case 1:
+            case 0:
                 result = option_1;
                 break;
-            case 2:
+            case 1:
                 result = option_2;
                 break;
-            case 3:
+            case 2:
                 result = option_3;
                 break;
-            case 4:
+            case 3:
                 result = option_4;
                 break;
             default:
