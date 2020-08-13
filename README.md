@@ -1,6 +1,6 @@
 # Quiz App
 
-This is an example Android Application README to show briefly the sections your app README should contain.
+Multiple-choice questions about general information.
 
 ## Installation
 Clone this repository and import into **Android Studio**
