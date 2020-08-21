@@ -108,7 +108,7 @@ public class QuizActivity extends AppCompatActivity {
         option_2.setText(q.getContent().get(1));
         option_3.setText(q.getContent().get(2));
         option_4.setText(q.getContent().get(3));
-        tv_questionCount.setText(String.format("%d \t/\t%d", currentQuestion + 1, questions.size()));
+        tv_questionCount.setText(String.format("%d \t / \t %d", currentQuestion + 1, questions.size()));
         // Reassign the correct answer
         correctAnswer = q.getCorrect();
     }

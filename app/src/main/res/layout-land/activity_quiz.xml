@@ -49,7 +49,7 @@
             android:textSize="@dimen/quiz_count_textSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="i\t / \t *" />
+            tools:text="i \t / \t *" />
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/questions_scroll_view"
